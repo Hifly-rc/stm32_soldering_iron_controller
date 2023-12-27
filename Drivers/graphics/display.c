@@ -438,9 +438,12 @@ void lcd_init(I2C_HandleTypeDef *device,DMA_HandleTypeDef *dma){
   HAL_Delay(1);
   Oled_Set_RES();
 #endif
+#ifdef USE_BLK
+  Oled_Clear_BLK();
+#endif
   HAL_IWDG_Refresh(&hiwdg);                       // Clear watchdog
   HAL_Delay(200);                                 // 200mS wait for internal initialization
-  systemSettings.settings.displayStartColumn = 2;         // Set by default while system settings are not loaded
+  systemSettings.settings.displayStartColumn = 0;         // Set by default while system settings are not loaded
   HAL_IWDG_Refresh(&hiwdg);                       // Clear watchdog
 
 #if defined DISPLAY_I2C && defined DISPLAY_DEVICE && defined I2C_TRY_HW

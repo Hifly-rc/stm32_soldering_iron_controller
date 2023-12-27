@@ -23,7 +23,7 @@ widget_t *widget_Temp;
 
 static int32_t debug_temp;
 static uint8_t update, update_draw;
-#define PID_SZ  95
+#define PID_SZ  85
 typedef struct {
   uint8_t p[PID_SZ];
   uint8_t i[PID_SZ];

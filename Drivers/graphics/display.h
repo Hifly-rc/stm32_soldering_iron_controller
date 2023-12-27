@@ -178,6 +178,11 @@ enum { fill_soft, fill_dma };
 #define Oled_Clear_DC()   DISPLAY_DC_GPIO_Port->BRR = DISPLAY_DC_Pin
 #endif
 
+#ifdef USE_BLK
+#define Oled_Set_BLK() 		DISPLAY_BLK_GPIO_Port->BSRR = DISPLAY_BLK_Pin
+#define Oled_Clear_BLK() 	DISPLAY_BLK_GPIO_Port->BRR = DISPLAY_BLK_Pin
+#endif
+
 #ifdef USE_RST
 #define Oled_Set_RES()    DISPLAY_RST_GPIO_Port->BSRR = DISPLAY_RST_Pin
 #define Oled_Clear_RES()  DISPLAY_RST_GPIO_Port->BRR = DISPLAY_RST_Pin

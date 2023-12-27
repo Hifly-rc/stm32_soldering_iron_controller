@@ -21,7 +21,7 @@
 const settings_t defaultSettings = {
   .version              =  SYSTEM_SETTINGS_VERSION,
 #ifdef ST7565
-  .contrastOrBrightness = 34,
+  .contrastOrBrightness = 20,
 #else
   .contrastOrBrightness = 255,
 #endif

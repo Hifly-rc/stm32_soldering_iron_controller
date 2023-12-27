@@ -268,7 +268,7 @@ static void Cal_create(screen_t *scr) {
   widget_t* w;
 
   newWidget(&w,widget_combo,scr, NULL);
-  w->posY=10;
+  //w->posY=10;
 
   newComboScreen(w, strings[lang]._START, screen_calibration_start, NULL);
   newComboScreen(w, strings[lang]._SETTINGS, screen_calibration_settings, NULL);
