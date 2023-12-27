@@ -4,6 +4,7 @@
 
 * [Project details](#project-details)
 * [Compatibility](#compatibility)
+* [Bug reporting](#bug-reporting)
 * [Programming](Readme_files/Programming.md)
 * [Operating instructions](Readme_files/Operation.md)
 * [Frequently asked questions](#frequently-asked-questions)
@@ -38,6 +39,10 @@ Video of operation here: (Project in active development, the features will chang
 
 ## Compatibility
 
+Check [Boards readme](Readme_files/boards.md) for quick board identification.<br>
+Visit [Dreamcat4 T12 controllers](https://github.com/dreamcat4/t12-t245-controllers-docs) for more pictures and schematics.<br>
+[BOARDS](https://github.com/deividAlfa/stm32_soldering_iron_controller/tree/master/BOARDS) folder contains the build profiles.<br>
+**KSGER Combo station is not supported!**<br><br>
 The actual requirements are 10KB RAM and 64KB **(\*)** flash.<br>
 **(\*)** Currently the firmware has surpassed the 64KB limit, and uses the additional undocumented 64KB flash block.<br>
 **(\*)** All 64KB devices have 128KB, with the second 64KB block untested from the factory, so not guaranteed to work.<br>
@@ -54,17 +59,15 @@ There's a new experimental workaround for clones, try enabling `Clone fix` in [`
 
 If your board came with a clone, you can replace it with a STM32F101/102/103, they're pin-compatible.<br>
 
-The [BOARDS](https://github.com/deividAlfa/stm32_soldering_iron_controller/tree/master/BOARDS) folder has the board profiles and some schematics / pictures for quickly identify your hardware.<br>
-Check [Dreamcat4 T12 controllers](https://github.com/dreamcat4/t12-t245-controllers-docs), did a much better collection with T12 boards schematics and pictures.<br><br>
 Currently supported controllers:
-* **Quicko T12-072**: First gen Quicko, STM32F072 variant. Compatibility was fixed in v1.04. [Old version](https://github.com/deividAlfa/stm32_soldering_iron_controller/raw/9f4b7f9565344e30a6ce1394d28350f82089488b/BOARDS/Quicko/STM32F072_SSD1306/STM32SolderingStation.bin).
-* **Quicko T12-103** First gen Quicko, STM32F103 variant.
+* **Quicko T12-072**: First gen Quicko, STM32F072 variant. Compatibility issues were fixed since v1.04. [Old version](https://github.com/deividAlfa/stm32_soldering_iron_controller/raw/9f4b7f9565344e30a6ce1394d28350f82089488b/BOARDS/Quicko/STM32F072_SSD1306/STM32SolderingStation.bin).
+* **Quicko T12-103** First gen Quicko, same board but mounting a STM32F103.
 * **KSGER v1.5**: Profile for STM32F103 (There are no other known CPUs used in this board).
 * **KSGER v2**,   **JCD T12**, **T12-955**, **Handskit**: Profile compatible with all STM32F101/2/3xx models.
 * **KSGER v3**,   **T12-958**: Profile compatible with all STM32F101/2/3xx models.
 
 Don't follow the version reported in the original firmware to identify your board.<br>
-The easiest way to quickly identify your controller version is by looking at the OLED screen connection:
+To this day, the easiest way to quickly identify your controller version is by checking the OLED screen connection:
 - **4 pin** (I2C) = Generic v2 (KSGER/Quecoo/Handskit/etc.)
 - **6 pin** (SPI) = Generic v3
 - **7 pin** (SPI) = Only used by KSGER v1.5 or first gen Quicko, easy to differentiate.
@@ -73,6 +76,19 @@ For KSGER v2/v3: As long as use the correct firmware, any STM32 variant (101/102
 There are several compatible/cloned boards in the market that will work fine with KSGER profiles.<br>
 
 T12-951, T12-952, T12-956, T12-959 use STC MCU, not supported by this firmware.
+
+
+## Bug reporting
+If you encounter any error or bug:<br>
+- Ensure your STM32 is genuine, check [STM32 Clones](Readme_files/Programming.md#clone-detection).
+- Throughly read the readme and manual and check if your issue is explained somewhere.
+- If still no solution for it, open a new [`issue`](https://github.com/deividAlfa/stm32_soldering_iron_controller/issues) specifying: 
+  - Firmware version (v.XX) and type (KSGER V2, etc).
+  - If showing a screen with "Error: file xx.c, line n", mention this or attach a picture.
+  - If getting a Hardfault, attach a picture of the data shown on the screen.<br>
+    If you want to check yourself, check the `PC` address shown in the screen and search it in the listing file (.list).<br>
+    This will show where it happened in the program.
+- You might also ask at [Eevblog](https://www.eevblog.com/forum/reviews/stm32-oled-digital-soldering-station-for-t12-handle/) (English), [4PDA](https://4pda.to/forum/index.php?showtopic=1009098) (Russian), [Radiokot](https://www.radiokot.ru/forum/viewtopic.php?t=178399) (Russian) forums.    
 
 
 ## Frequently asked questions
@@ -89,12 +105,21 @@ Some KSGER firmwares require an activation code which can be generated [[HERE]](
 Be warned, usually the MCU will be read-protected, so you won't be able to read its contents, only erase it.<br>
 The simplest way to not loose the original firmware is actually to buy a new MCU, replace it, and store the original MCU in a safe place.<br>
 Any difference in the pinout will require firmware tuning, although one of the main proposits of this firmware is easing that.<br>
-There are some hacks / vulnerabilities that can be used to backup protected firmware, more details here: [STM32 power glitching timing attack](https://github.com/dreamcat4/t12-t245-controllers-docs/tree/master/tools/software/STM32CubeIDE#option-2-power-glitching-timing-attack
-)
+There are some vulnerabilities that can be used to backup protected firmware:
+- [STM32 power glitching timing attack](https://github.com/dreamcat4/t12-t245-controllers-docs/tree/master/tools/software/STM32CubeIDE#option-2-power-glitching-timing-attack).
+- [PicoPwner](https://github.com/CTXz/stm32f1-picopwner/). Tested, works very well.
+
+### Battery mod
+Some commonly changed settings (Temperature setpoint, tip/profile selection) can be saved to the RTC SRAM, reducing flash wear.<br>
+The RTC needs a battery connected to STM32's VBAT pin, most boards have a battery connector for this.<br>
+- Install a 3.3V cell battery. Some boards have a resistor connected between VBAT pin and GND, will drain the battery, remove it.<br>
+- Enable [`SYSTEM`](Readme_files/Operation.md#system) > `Battery`.
 
 ### Display issues
-If the display has right/left line like this picture: Go to [`System`](Readme_files/Operation.md#system) > `Offset` menu and adjust the value until it's centered.<br>
-<img src="/Readme_files/oled_offset.jpg?raw=true" width="320">
+If the display has right/left line or is vertically shifted:<br>
+- Go to [`System`](Readme_files/Operation.md#system) > `Display` menu.<br>
+- Adjust `X/Y Offsets` until it's centered.<br>
+<img src="/Readme_files/oled_offset.jpg" width="320">
 
 ### Temperature unstability
 By default, never modify any PWM or Delay settings in the [`Iron`](Readme_files/Operation.md#iron) menu. Doing so may cause such issues.<br>
@@ -137,7 +162,9 @@ Zero calibration can't be manually restored, but it only takes few seconds to ad
 
 ### Cold tip not showing ambient temperature
 Some amplifiers can introduce a small voltage offset that will translate into the cold tip reading 30-50°C higher than ambient temperature.<br>
-To fix that, enter the [`Calibration`](Readme_files/Operation.md#calibration) menu, insert a completely cold tip, enter `Settings`, adjust `Zero set` calibration and save.<br>
+To fix that, follow this order exactly!<br>
+Tip power is removed in Calibration menu, inserting the tip before will heat it up and make cold calibration impossible.<br>
+Enter the [`Calibration`](Readme_files/Operation.md#calibration) menu, **insert a completely cold tip now**, enter `Settings`, adjust `Zero set` calibration and save.<br>
 After that, the offset will be compensated and the cold temperature will be normal.<br>
 It's highly recommended to recalibrate after changing this value.
 
@@ -152,8 +179,10 @@ There're some options to fix this:<br>
 - Use a small DC/DC step-down module to convert 24V to 5V, and feed 5V to the 3.3V LDO (best option, barely makes any heat).
 
 ### Other issues
-After fully reading the documentation, if you still have problems or doubts, please ask in the EEVblog thread:<br>
-https://www.eevblog.com/forum/reviews/stm32-oled-digital-soldering-station-for-t12-handle/
+After fully reading the documentation, if you still have problems or doubts, there're several forums with threads about this firmare:<br>
+- [Eevblog](https://www.eevblog.com/forum/reviews/stm32-oled-digital-soldering-station-for-t12-handle/) (English).
+- [4PDA](https://4pda.to/forum/index.php?showtopic=1009098) (Russian).
+- [Radiokot](https://www.radiokot.ru/forum/viewtopic.php?t=178399) (Russian).
 
 
 ## Translations
