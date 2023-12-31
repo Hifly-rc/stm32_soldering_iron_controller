@@ -76,8 +76,6 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define DISPLAY_TYPE_Pin GPIO_PIN_13
-#define DISPLAY_TYPE_GPIO_Port GPIOC
 #define WAKE_Pin GPIO_PIN_0
 #define WAKE_GPIO_Port GPIOA
 #define BUZ0_Pin GPIO_PIN_1
