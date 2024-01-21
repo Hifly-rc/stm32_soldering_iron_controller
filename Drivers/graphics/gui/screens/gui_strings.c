@@ -324,7 +324,7 @@ const strings_t strings[LANGUAGE_COUNT] = {
         .TIP_SETTINGS_PID_Imax = "PID Imax",
         .TIP_SETTINGS_PID_Imin = "PID Imin",
         .TIP_SETTINGS_COPY = "复制",
-        .TIP_SETTINGS_DELETE = "刪除",
+        .TIP_SETTINGS_DELETE = "删除",
 
         .CAL_ZeroSet = "参考值     ",  // Must be 11 chars long
         .CAL_Sampling = "取样值     ", // Must be 11 chars long
