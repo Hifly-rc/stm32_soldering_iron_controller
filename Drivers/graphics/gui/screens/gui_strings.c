@@ -98,7 +98,6 @@ const strings_t strings[LANGUAGE_COUNT] = {
       .SYSTEM_Gui_Time = "Gui time",
       .SYSTEM_Battery = "Battery",
       .SYSTEM_DEBUG = "DEBUG",
-      .SYSTEM_CLONE_FIX = "Clone fix",
       .SYSTEM_RESET_MENU = "RESET MENU",
 
       .SYSTEM_DISPLAY_MENU = "DISPLAY",
@@ -278,7 +277,6 @@ const strings_t strings[LANGUAGE_COUNT] = {
         .SYSTEM_Gui_Time = "显示频率",
         .SYSTEM_Battery = "系统电池",
         .SYSTEM_DEBUG = "调试菜单",
-        .SYSTEM_CLONE_FIX = "克隆修正",
         .SYSTEM_RESET_MENU = "重置菜单",
 
         .SYSTEM_DISPLAY_MENU = "屏幕设置",
