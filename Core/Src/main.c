@@ -515,7 +515,7 @@ static void MX_GPIO_Init(void)
   HAL_GPIO_Init(GPIOA, &GPIO_InitStruct);
 
   /*Configure GPIO pins : DISPLAY_RST_Pin DISPLAY_DC_Pin */
-  GPIO_InitStruct.Pin = DISPLAY_RST_Pin|DISPLAY_DC_Pin;
+  GPIO_InitStruct.Pin = DISPLAY_RST_Pin|DISPLAY_DC_Pin|DISPLAY_CS_Pin|DISPLAY_BLK_Pin;
   GPIO_InitStruct.Mode = GPIO_MODE_OUTPUT_PP;
   GPIO_InitStruct.Pull = GPIO_NOPULL;
   GPIO_InitStruct.Speed = GPIO_SPEED_FREQ_LOW;

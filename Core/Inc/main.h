@@ -102,6 +102,10 @@ void Error_Handler(void);
 #define DISPLAY_RST_GPIO_Port GPIOA
 #define DISPLAY_DC_Pin GPIO_PIN_9
 #define DISPLAY_DC_GPIO_Port GPIOA
+#define DISPLAY_CS_Pin GPIO_PIN_10
+#define DISPLAY_CS_GPIO_Port GPIOA
+#define DISPLAY_BLK_Pin GPIO_PIN_11
+#define DISPLAY_BLK_GPIO_Port GPIOA
 #define ENC_SW_Pin GPIO_PIN_15
 #define ENC_SW_GPIO_Port GPIOA
 #define ENC_L_Pin GPIO_PIN_3
