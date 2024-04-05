@@ -81,7 +81,7 @@ def main():
     
     # Generate menu files and mapping files
     menu_chars = extract_chars(read_file(gui_strings_path), lambda var: 'main_mode_' not in var and 'main_error_' not in var)
-    small_chars = extract_chars(read_file(gui_strings_path), lambda var: 'main_mode' in var or 'main_error' in var)
+    small_chars = extract_chars(read_file(gui_strings_path), lambda var: 'main_mode_' in var or 'main_error_' in var)
 
     write_file(os.path.join(output_dir, "font_menu_ch.txt"), "".join(menu_chars) + f"简繁└")
     write_file(os.path.join(output_dir, "font_small_ch.txt"), "".join(small_chars))
