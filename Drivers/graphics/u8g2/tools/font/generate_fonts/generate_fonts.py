@@ -41,7 +41,7 @@ def run_command(command):
     subprocess.run(command, shell=True)
 
 # Function to replace pixels in a file
-def replace_piex(file_path, ustr, nstr):
+def replace_pixel(file_path, ustr, nstr):
     """Replace a specific string with another in a file."""
     if os.path.exists(file_path):
         with open(file_path, 'r', encoding='utf-8') as file:
@@ -106,9 +106,9 @@ def main():
     run_command(f"..\\bdfconv\\bdfconv.exe -v -b 0 -f 1 -m \"45,48-57,67,70,176\" \"../bdf/ITC Avant Garde Gothic Medium_31.bdf\" -o {os.path.join(output_dir, 'font_iron_temp.c')}  -n u8g2_font_iron_temp")
     
     # Replace specific characters
-    replace_piex(os.path.join(output_dir, "font_iron_temp.c"), "\\42\\", "\\45\\")
-    replace_piex(os.path.join(output_dir, "font_menu.c"), "\\21\\", "\\17\\")
-    replace_piex(os.path.join(output_dir, "font_small.c"), "\\16\\", "\\12\\")
+    replace_pixel(os.path.join(output_dir, "font_iron_temp.c"), "\\42\\", "\\45\\")
+    replace_pixel(os.path.join(output_dir, "font_menu.c"), "\\21\\", "\\17\\")
+    replace_pixel(os.path.join(output_dir, "font_small.c"), "\\16\\", "\\12\\")
     
     # Merge C files
     font_files = [os.path.join(output_dir, "font_iron_temp.c"),
