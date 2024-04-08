@@ -86,11 +86,8 @@ def main():
     write_file(os.path.join(output_dir, "font_menu_ch.txt"), "".join(menu_chars) + f"简繁└")
     write_file(os.path.join(output_dir, "font_small_ch.txt"), "".join(small_chars))
 
-    map_file_data_menu = make_map_file(os.path.join(output_dir, "font_menu_ch.txt"))
-    map_file_data_small = make_map_file(os.path.join(output_dir, "font_small_ch.txt"))
-
-    write_file(os.path.join(output_dir, "font_menu_ch.map"), map_file_data_menu)
-    write_file(os.path.join(output_dir, "font_small_ch.map"), map_file_data_small)
+    write_file(os.path.join(output_dir, "font_menu_ch.map"), make_map_file(os.path.join(output_dir, "font_menu_ch.txt")))
+    write_file(os.path.join(output_dir, "font_small_ch.map"), make_map_file(os.path.join(output_dir, "font_small_ch.txt")))
     
     # Call external programs to generate BDF files
     run_command(f"..\\otf2bdf\\otf2bdf.exe -m {os.path.join(output_dir, 'font_menu_ch.map')} -p 9 fireflysung.ttf -o {os.path.join(output_dir, 'font_menu_ch.bdf')}")
